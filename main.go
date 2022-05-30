@@ -1,21 +1,21 @@
 package binviz
 
 import (
+	"github.com/corona10/goimagehash"
 	"github.com/roaldi/richdiff"
 	"image"
 	"image/color"
 	"image/png"
 	"log"
 	"math"
-	"github.com/corona10/goimagehash"
 	"os"
 )
 
 type BinViz struct {
 	RichDiffResults richdiff.Results
 	Image image.Image
-	BinAverageHash *goimagehash.ImageHash
-	BinDifferenceHash *goimagehash.ImageHash
+	BinAverageHash *goimagehash.ExtImageHash
+	BinDifferenceHash *goimagehash.ExtImageHash
 	RichAverageHash *goimagehash.ImageHash
 	RichDifferenceHash *goimagehash.ImageHash
 }
@@ -35,6 +35,23 @@ func (b BinViz) DifferenceDistance(altBinViz BinViz) int {
 	}
 	return distance
 }
+
+func (b BinViz) RichAverageDistance(altBinViz BinViz) int {
+	distance, err := b.RichAverageHash.Distance(altBinViz.RichAverageHash)
+	if err != nil {
+		return 0
+	}
+	return distance
+}
+
+func (b BinViz) RichDifferenceDistance(altBinViz BinViz) int {
+	distance, err := b.RichDifferenceHash.Distance(altBinViz.RichDifferenceHash)
+	if err != nil {
+		return 0
+	}
+	return distance
+}
+
 
 func (b BinViz) SaveImage(filename string) error {
 	file, err := os.Create(filename)
@@ -60,11 +77,11 @@ func ProcessBinary(data []byte) (BinViz, error) {
 		log.Println(err.Error())
 		return BinViz{}, err
 	}
-	binViz.BinAverageHash, err = goimagehash.AverageHash(binViz.Image)
+	binViz.BinAverageHash, err = goimagehash.ExtAverageHash(binViz.Image, 16, 16)
 	if err != nil {
 		log.Println(err.Error())
 	}
-	binViz.BinDifferenceHash, err = goimagehash.DifferenceHash(binViz.Image)
+	binViz.BinDifferenceHash, err = goimagehash.ExtDifferenceHash(binViz.Image, 16, 16)
 	if err != nil {
 		log.Println(err.Error())
 	}
