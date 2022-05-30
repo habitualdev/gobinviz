@@ -105,6 +105,25 @@ func byteToPng(data []byte) (image.Image, error) {
 		data = append(data, make([]byte, sizeDiff)...)
 	}
 	img := image.NewRGBA(image.Rect(0, 0, imageSideLength, imageSideLength))
+
+	numSideBlocks := imageSideLength / 100
+	blockCount := 0
+
+	for i := 0; i < byteSize; i++ {
+		x := i % 100
+		y := i % 100
+
+		img.SetRGBA(x +((blockCount % numSideBlocks) * 100), y +((blockCount % numSideBlocks) * 100), color.RGBA{
+			R: data[i],
+			G: data[i],
+			B: data[i],
+			A: 255,
+		})
+		if x == 0 && y == 0 {
+			blockCount++
+		}
+	}
+	/*
 	for i := 0; i < imageSideLength; i++ {
 		for j := 0; j < imageSideLength; j++ {
 			img.Set(i, j, color.RGBA{
@@ -114,6 +133,10 @@ func byteToPng(data []byte) (image.Image, error) {
 				uint8(255),
 			})
 		}
+
+
 	}
+
+	 */
 	return img, nil
 }
