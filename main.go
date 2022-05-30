@@ -11,6 +11,8 @@ import (
 	"os"
 )
 
+const blockSize = 150
+
 type BinViz struct {
 	RichDiffResults richdiff.Results
 	Image image.Image
@@ -77,11 +79,11 @@ func ProcessBinary(data []byte) (BinViz, error) {
 		log.Println(err.Error())
 		return BinViz{}, err
 	}
-	binViz.BinAverageHash, err = goimagehash.ExtAverageHash(binViz.Image, 16, 16)
+	binViz.BinAverageHash, err = goimagehash.ExtAverageHash(binViz.Image, 32, 32)
 	if err != nil {
 		log.Println(err.Error())
 	}
-	binViz.BinDifferenceHash, err = goimagehash.ExtDifferenceHash(binViz.Image, 16, 16)
+	binViz.BinDifferenceHash, err = goimagehash.ExtDifferenceHash(binViz.Image, 32, 32)
 	if err != nil {
 		log.Println(err.Error())
 	}
@@ -106,26 +108,25 @@ func byteToPng(data []byte) (image.Image, error) {
 	}
 	img := image.NewRGBA(image.Rect(0, 0, imageSideLength, imageSideLength))
 
-	//numSideBlocks := imageSideLength / 100
-	//blockCount := 0
-
-	for i := 0; i < byteSize; i++ {
-		img.SetRGBA(i % 100, i & 100, color.RGBA{data[i], data[i], data[i], 255})
+	numSideBlocks := imageSideLength / blockSize
+	if numSideBlocks == 0 {
+		numSideBlocks = 1
 	}
-	/*
+	pix := 0
 	for i := 0; i < imageSideLength; i++ {
 		for j := 0; j < imageSideLength; j++ {
-			img.Set(i, j, color.RGBA{
-				uint8(data[j*imageSideLength+i]),
-				uint8((data[j*imageSideLength+i])),
-				uint8((data[j*imageSideLength+i])),
+			pix++
+			if pix > len(data) - 1 {
+				break
+			}
+			img.Set(i % blockSize + ((i/blockSize)%numSideBlocks)*blockSize , j%blockSize + ((j/blockSize)%numSideBlocks)*blockSize, color.RGBA{
+				uint8(data[pix]),
+				uint8((data[pix])),
+				uint8((data[pix])),
 				uint8(255),
 			})
 		}
-
-
 	}
 
-	 */
 	return img, nil
 }
