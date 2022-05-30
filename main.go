@@ -111,7 +111,7 @@ func byteToPng(data []byte) (image.Image, error) {
 				uint8(data[j*imageSideLength+i]),
 				uint8((data[j*imageSideLength+i])),
 				uint8((data[j*imageSideLength+i])),
-				uint8(data[j*imageSideLength+i]),
+				uint8(255),
 			})
 		}
 	}
