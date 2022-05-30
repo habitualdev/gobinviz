@@ -108,7 +108,7 @@ func byteToPng(data []byte) (image.Image, error) {
 	}
 	img := image.NewRGBA(image.Rect(0, 0, imageSideLength, imageSideLength))
 
-	numSideBlocks := imageSideLength / blockSize
+	numSideBlocks := (imageSideLength / blockSize) + 1
 	if numSideBlocks == 0 {
 		numSideBlocks = 1
 	}
