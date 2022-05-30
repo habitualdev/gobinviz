@@ -77,11 +77,11 @@ func ProcessBinary(data []byte) (BinViz, error) {
 		log.Println(err.Error())
 		return BinViz{}, err
 	}
-	binViz.BinAverageHash, err = goimagehash.ExtAverageHash(binViz.Image, 32, 32)
+	binViz.BinAverageHash, err = goimagehash.ExtAverageHash(binViz.Image, 16, 16)
 	if err != nil {
 		log.Println(err.Error())
 	}
-	binViz.BinDifferenceHash, err = goimagehash.ExtDifferenceHash(binViz.Image, 32, 32)
+	binViz.BinDifferenceHash, err = goimagehash.ExtDifferenceHash(binViz.Image, 16, 16)
 	if err != nil {
 		log.Println(err.Error())
 	}
