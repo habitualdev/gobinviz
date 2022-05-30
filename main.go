@@ -110,7 +110,7 @@ func byteToPng(data []byte) (image.Image, error) {
 			img.Set(i, j, color.RGBA{
 				uint8(data[j*imageSideLength+i]),
 				uint8(255/data[j*imageSideLength+i]),
-				uint8(255/data[j*imageSideLength+i]),
+				uint8(255/data[j*imageSideLength+i] + 1),
 				uint8(data[j*imageSideLength+i]),
 			})
 		}
