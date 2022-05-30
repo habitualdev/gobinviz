@@ -110,7 +110,7 @@ func byteToPng(data []byte) (image.Image, error) {
 	//blockCount := 0
 
 	for i := 0; i < byteSize; i++ {
-		img.SetRGBA(i % 100, i / 100, color.RGBA{data[i], data[i], data[i], 255})
+		img.SetRGBA(i % 100, i & 100, color.RGBA{data[i], data[i], data[i], 255})
 	}
 	/*
 	for i := 0; i < imageSideLength; i++ {
