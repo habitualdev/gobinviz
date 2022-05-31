@@ -148,7 +148,11 @@ func byteToPng(b BinViz) (image.Image, error) {
 	for _, section := range b.PEInfo.Sections{
 		sectionAddresses =  append(sectionAddresses, section.Header.VirtualAddress)
 	}
-	sectionStep := 255/ len(sectionAddresses)
+
+	sectionStep := 1
+	if len(sectionAddresses) > 1 {
+		sectionStep = 255 / len(sectionAddresses)
+	}
 	sectionColor := 0
 	for i := 0; i <byteSize; i++{
 		for _, address := range sectionAddresses{
