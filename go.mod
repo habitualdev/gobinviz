@@ -1,4 +1,4 @@
-module github.com/roaldi/gobinviz
+module github.com/habitualdev/gobinviz
 
 go 1.18
 
