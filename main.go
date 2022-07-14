@@ -5,7 +5,7 @@ import (
 	"github.com/ajdnik/imghash/hashtype"
 	"github.com/ajdnik/imghash/similarity"
 	"github.com/corona10/goimagehash"
-	"github.com/roaldi/richdiff"
+	"github.com/habitualdev/richdiff"
 	"github.com/dsoprea/hilbert"
 	"image"
 	"image/color"
