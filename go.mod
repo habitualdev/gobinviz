@@ -6,7 +6,7 @@ require (
 	github.com/ajdnik/imghash v1.0.0
 	github.com/corona10/goimagehash v1.1.0
 	github.com/dsoprea/hilbert v0.0.0-20170129033827-2ad04e2ae9f8
-	github.com/roaldi/richdiff v0.0.0-20220529155939-aad7c696e4a1
+	github.com/habitualdev/richdiff v0.0.0-20220529155939-aad7c696e4a1
 	github.com/saferwall/pe v1.1.9
 )
 
