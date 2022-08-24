@@ -1,4 +1,4 @@
-module github.com/habitualdev/gobinviz
+module gobinviz
 
 go 1.18
 
@@ -6,8 +6,8 @@ require (
 	github.com/ajdnik/imghash v1.0.0
 	github.com/corona10/goimagehash v1.1.0
 	github.com/dsoprea/hilbert v0.0.0-20170129033827-2ad04e2ae9f8
-	github.com/habitualdev/richdiff
-	github.com/saferwall/pe v1.1.9
+	github.com/habitualdev/richdiff v0.0.0-20220714010547-70cd5aa063ca
+	github.com/saferwall/pe v1.3.0
 )
 
 require (
